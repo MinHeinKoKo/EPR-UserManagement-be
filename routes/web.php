@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+Route::middleware('auth')->group(function (){
+    Route::apiResource('/dashboard', UserController::class);
 });
