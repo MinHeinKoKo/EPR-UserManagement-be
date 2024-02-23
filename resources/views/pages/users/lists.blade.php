@@ -1,5 +1,5 @@
 @extends('layout.dashboard')
-@section('title', "EPRPOST | User's Lists")
+@section('title', "ERPPOS | User's Lists")
 @section('content')
     <div class="w-full p-5 h-screen ">
 

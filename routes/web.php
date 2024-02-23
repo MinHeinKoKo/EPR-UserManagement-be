@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Feature\FeatureController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,6 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class , 'login'])->name('login.post');
 Route::middleware('auth')->prefix('dashboard')->group(function (){
-    Route::apiResource('/', UserController::class);
-    Route::get('/create', [UserController::class, 'create'])->name('create');
+    Route::resource('/', UserController::class);
+    Route::resource('/features', FeatureController::class);
 });
