@@ -6,6 +6,8 @@ namespace App\Repositories\User;
 
 use App\Interfaces\User\UserInterface;
 use App\Models\User;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements UserInterface
 {
@@ -33,6 +35,7 @@ class UserRepository implements UserInterface
 
     public function store(array $data)
     {
+        $data['password'] = Hash::make($data['password']);
         return User::create($data);
     }
 

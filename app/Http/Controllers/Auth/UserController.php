@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\UserRequest;
+use App\Models\Role;
 use App\Models\User;
 use App\Usescases\User\UserAction;
 use Illuminate\Http\Request;
@@ -30,15 +32,17 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('pages.users.create');
+        $roles = Role::all();
+        return view('pages.users.create', compact(['roles']));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $this->userAction->store($request->all());
+        return redirect()->route('index')->with("New User is created successfully.");
     }
 
     /**
@@ -46,7 +50,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('pages.users.show', compact(['user']));
     }
 
     /**
@@ -54,15 +58,16 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('pages.users.edit', compact(['user']));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $this->userAction->update($request->all(), $user);
+        return redirect()->route('index')->with("New User is updated successfully.");
     }
 
     /**
@@ -70,6 +75,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $this->userAction->delete($user);
+        return redirect()->route('index')->with("New User is deleted successfully.");
     }
 }
