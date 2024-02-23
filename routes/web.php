@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Feature\FeatureController;
 use App\Http\Controllers\Permission\PermissionController;
 
@@ -24,6 +25,7 @@ Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class , 'login'])->name('login.post');
 Route::middleware('auth')->prefix('dashboard')->group(function (){
     Route::resource('/', UserController::class);
+    Route::resource('/roles', RoleController::class);
     Route::resource('/features', FeatureController::class);
     Route::resource('/permissions', PermissionController::class);
 });
