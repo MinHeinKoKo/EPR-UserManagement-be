@@ -13,7 +13,7 @@
         <div class="">
             @include('components.sidebar')
         </div>
-        <div>
+        <div class="w-full">
             @yield('content')
         </div>
     </div>
