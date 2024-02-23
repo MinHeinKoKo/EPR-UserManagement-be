@@ -22,7 +22,7 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->userAction->fetchAllUsers();
-        return view('')
+        return view('pages.users.lists',compact(['users']));
     }
 
     /**
