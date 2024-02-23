@@ -18,7 +18,8 @@ use App\Http\Controllers\Auth\LoginController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::post('/login', [LoginController::class, 'login']);
-Route::middleware('auth')->group(function (){
-    Route::apiResource('/dashboard', UserController::class);
+Route::get('/login', [LoginController::class, 'show'])->name('login');
+Route::post('/login', [LoginController::class , 'login'])->name('login.post');
+Route::middleware('auth')->prefix('dashboard')->group(function (){
+    Route::apiResource('/', UserController::class);
 });
