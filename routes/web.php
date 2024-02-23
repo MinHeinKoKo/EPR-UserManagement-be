@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/login', [LoginController::class, 'show'])->name('login');
-Route::post('/Sign-in', [LoginController::class , 'login'])->name('login.post');
+Route::post('/login', [LoginController::class , 'login'])->name('login.post');
 Route::middleware('auth')->prefix('dashboard')->group(function (){
     Route::apiResource('/', UserController::class);
 });

@@ -13,24 +13,38 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('roles_permissions', function (Blueprint $table){
+        Schema::table('permissions', function (Blueprint $table){
             Schema::disableForeignKeyConstraints();
-            DB::table('features')->truncate();
+            DB::table('permissions')->truncate();
             Schema::enableForeignKeyConstraints();
 
             $data = [
                 [
                     'id' => 1,
-                    'name' => 'testing',
+                    'name' => 'create',
+                    'feature_id' => 1,
                     'created_at' => Carbon::now()
                 ],
                 [
                     'id' => 2,
-                    'name' => 'migration',
+                    'name' => 'show',
+                    'feature_id' => 2,
+                    'created_at' => Carbon::now()
+                ],
+                [
+                    'id' => 3,
+                    'name' => 'update',
+                    'feature_id' => 1,
+                    'created_at' => Carbon::now()
+                ],
+                [
+                    'id' => 4,
+                    'name' => 'delete',
+                    'feature_id' => 2,
                     'created_at' => Carbon::now()
                 ],
             ];
-            DB::table('features')->insert($data);
+            DB::table('permissions')->insert($data);
         });
     }
 
@@ -40,7 +54,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::disableForeignKeyConstraints();
-        DB::table('features')->truncate();
+        DB::table('permissions')->truncate();
         Schema::enableForeignKeyConstraints();
     }
 };
