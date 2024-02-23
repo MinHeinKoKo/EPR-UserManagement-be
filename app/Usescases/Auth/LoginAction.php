@@ -13,7 +13,7 @@ class LoginAction
     {
         try {
             if (Auth::attempt($request->only(['email','password']))){
-                return view('dashboard.index');
+                return route('index');
             }
         }catch (\Throwable $th){
             return $th->getMessage();
