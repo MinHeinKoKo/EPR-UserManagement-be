@@ -4,16 +4,25 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Usescases\User\UserAction;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    protected $userAction;
+
+    public function __construct(UserAction $userAction)
+    {
+        $this->userAction = $userAction;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $users = $this->userAction->fetchAllUsers();
+        return view('')
     }
 
     /**
