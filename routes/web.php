@@ -22,4 +22,5 @@ Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class , 'login'])->name('login.post');
 Route::middleware('auth')->prefix('dashboard')->group(function (){
     Route::apiResource('/', UserController::class);
+    Route::get('/create', [UserController::class, 'create'])->name('create');
 });
