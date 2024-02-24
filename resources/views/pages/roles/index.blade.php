@@ -2,7 +2,11 @@
 @section('title', "ERPPOS | Roles")
 @section('content')
     <div class="flex gap-6 flex-col p-6">
-        <a href="{{ route('roles.create') }}" class="bg-blue-400 text-black px-6 py-2 capitalize w-fit rounded-md">Create</a>
+
+        @can('create', Auth::user())
+            <a href="{{ route('roles.create') }}" class="bg-blue-400 text-black px-6 py-2 capitalize w-fit rounded-md">Create</a>
+        @endcan
+
         <div class="overflow-x-auto w-full p-5 rounded-t-lg">
             <table class="divide-y-2 w-full divide-gray-200 bg-white text-sm">
                 <thead class="ltr:text-left rtl:text-right">
@@ -29,15 +33,19 @@
                             @endforeach
                         </td>
                         <td class="whitespace-nowrap text-center px-4 py-2 text-gray-700 flex gap-2 justify-center">
-                            <a href="{{ route('roles.edit' , $item->id) }}" class="text-green-400">
-                                Edit
-                            </a>
+                            @can('update', Auth::user())
+                                <a href="{{ route('roles.edit' , $item->id) }}" class="text-green-400">
+                                    Edit
+                                </a>
+                            @endcan
                             /
+                                @can('update', Auth::user())
                             <form method="post" action="{{ route('roles.destroy', $item->id) }}" class="relative">
                                 @csrf
                                 @method('delete')
                                 <button class="text-red-500">Delete</button>
                             </form>
+                                @endcan
                         </td>
                         <td class="whitespace-nowrap text-center px-4 py-2 text-gray-700">{{ \Illuminate\Support\Carbon::parse($item->created_at)->format('Y m d H:i:s') }}</td>
                     </tr>

@@ -7,6 +7,7 @@ use App\Http\Requests\Feature\FeatureRequest;
 use App\Models\Feature;
 use App\Usescases\Features\FeatureAction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FeatureController extends Controller
 {
@@ -21,6 +22,7 @@ class FeatureController extends Controller
      */
     public function index()
     {
+        $this->authorize('show', Auth::user());
         $features = $this->featureAction->fetchAllFeatures();
         return view('pages.features.index',compact(['features']));
     }
@@ -30,6 +32,7 @@ class FeatureController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Auth::user());
         return view('pages.features.create');
     }
 
@@ -38,6 +41,7 @@ class FeatureController extends Controller
      */
     public function store(FeatureRequest $request)
     {
+        $this->authorize('create', Auth::user());
         $this->featureAction->store($request->all());
         return redirect()->route("features.index")->with("New Features is created");
     }
@@ -47,6 +51,7 @@ class FeatureController extends Controller
      */
     public function show(Feature $feature)
     {
+        $this->authorize('show', Auth::user());
         return view('pages.features.show', $feature);
     }
 
@@ -55,6 +60,7 @@ class FeatureController extends Controller
      */
     public function edit(Feature $feature)
     {
+        $this->authorize('update', Auth::user());
         return view('pages.features.edit', compact(['feature']));
     }
 
@@ -63,6 +69,7 @@ class FeatureController extends Controller
      */
     public function update(Request $request, Feature $feature)
     {
+        $this->authorize('update', Auth::user());
         $this->featureAction->update($request->all() , $feature);
         return redirect()->route("features.index")->with("Features is updated");
     }
@@ -72,6 +79,7 @@ class FeatureController extends Controller
      */
     public function destroy(Feature $feature)
     {
+        $this->authorize('delete', Auth::user());
         $this->featureAction->delete($feature);
         return redirect()->route("features.index")->with("Features is deleted successfully");
     }
