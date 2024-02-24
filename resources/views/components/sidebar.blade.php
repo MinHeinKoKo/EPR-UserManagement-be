@@ -4,9 +4,15 @@
         <ul class="mt-6 space-y-1">
 
             <li>
+                <a href="{{ route('dashboard.index') }}" class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
                 <details class="group [&_summary::-webkit-details-marker]:hidden">
                     <summary
-                        class="{{ request()->url() === route('index') ? "bg-green-300 hover:bg-green-300/50" : "text-gray-500 hover:bg-gray-100 hover:text-gray-700" }} flex cursor-pointer items-center justify-between rounded-lg px-4 py-2"
+                        class="{{ request()->url() === route('users.index') ? "bg-green-300 hover:bg-green-300/50" : "text-gray-500 hover:bg-gray-100 hover:text-gray-700" }} flex cursor-pointer items-center justify-between rounded-lg px-4 py-2"
                     >
                         <span class="text-sm font-medium"> Users </span>
 
@@ -27,23 +33,27 @@
                     </summary>
 
                     <ul class="mt-2 space-y-1 px-4">
-                        <li>
-                            <a
-                                href="{{ route('create') }}"
-                                class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                            >
-                                Create
-                            </a>
-                        </li>
+                        @can('create', Auth::user())
+                            <li>
+                                <a
+                                    href="{{ route('users.create') }}"
+                                    class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                                >
+                                    Create
+                                </a>
+                            </li>
+                        @endcan
 
-                        <li>
-                            <a
-                                href="{{ route('index') }}"
-                                class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                            >
-                                Lists
-                            </a>
-                        </li>
+                        @can('show', Auth::user())
+                                <li>
+                                    <a
+                                        href="{{ route('users.index') }}"
+                                        class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                                    >
+                                        Lists
+                                    </a>
+                                </li>
+                            @endcan
                     </ul>
                 </details>
             </li>
@@ -195,7 +205,7 @@
 
             <div>
                 <p class="text-xs">
-                    <strong class="block font-medium">{{ \Illuminate\Support\Facades\Auth::user()->name }}</strong>
+                    <strong class="block font-medium">{{ \Illuminate\Support\Facades\Auth::user()->name }} - {{ Auth::user()->role->name }}</strong>
 
                     <span> {{ \Illuminate\Support\Facades\Auth::user()->email }} </span>
                 </p>

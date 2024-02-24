@@ -4,7 +4,7 @@
     <div class="w-full p-5 mx-auto">
             <div class="w-full border-2 border-blue-300 p-5 rounded-md">
                 <h3 class="text-black font-semibold text-xl tracking-wider w-full">Create New User</h3>
-                <form action="{{ route('store') }}" method="post" class="w-full grid grid-cols-2 gap-4 p-8">
+                <form action="{{ route('users.store') }}" method="post" class="w-full grid grid-cols-2 gap-4 p-8">
                     @csrf
                     <div class="col-span-1 flex flex-col mb-3">
                         <label for="name" class="text-md my-2">Name</label>

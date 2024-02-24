@@ -42,7 +42,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $this->userAction->store($request->all());
-        return redirect()->route('index')->with("New User is created successfully.");
+        return redirect()->route('users.index')->with("New User is created successfully.");
     }
 
     /**
@@ -58,7 +58,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('pages.users.edit', compact(['user']));
+        $roles = Role::all();
+        return view('pages.users.edit', compact(['user','roles']));
     }
 
     /**
@@ -67,7 +68,7 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $this->userAction->update($request->all(), $user);
-        return redirect()->route('index')->with("New User is updated successfully.");
+        return redirect()->route('users.index')->with("New User is updated successfully.");
     }
 
     /**
@@ -76,6 +77,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $this->userAction->delete($user);
-        return redirect()->route('index')->with("New User is deleted successfully.");
+        return redirect()->route('users.index')->with("New User is deleted successfully.");
     }
 }
