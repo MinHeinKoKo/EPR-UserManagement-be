@@ -29,15 +29,18 @@
                             <td class="whitespace-nowrap text-center px-4 py-2 text-gray-700">{{ $user->phone }}</td>
                             <td class="whitespace-nowrap text-center px-4 py-2 text-gray-700">{{ $user->address }}</td>
                             <td class="whitespace-nowrap text-center px-4 py-2 text-gray-700">
-                                <a href="{{ route('edit' , $user->id) }}" class="text-green-400">
-                                    Edit
-                                </a>
-                                /
-                                <form method="post" action="{{ route('destroy', $user->id) }}" class="relative">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="text-red-500">Delete</button>
-                                </form>
+                                @can('update', Auth::user())
+                                    <a href="{{ route('users.edit' , $user->id) }}" class="text-green-400">
+                                        Edit
+                                    </a>
+                                @endcan
+                                @can('delete' ,Auth::user())
+                                    <form method="post" action="{{ route('users.destroy', $user->id) }}" class="relative">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="text-red-500">Delete</button>
+                                    </form>
+                                @endcan
                             </td>
                             <td class="whitespace-nowrap text-center px-4 py-2 text-gray-700">{{ \Illuminate\Support\Carbon::parse($user->created_at)->format('Y m d H:i:s') }}</td>
                         </tr>

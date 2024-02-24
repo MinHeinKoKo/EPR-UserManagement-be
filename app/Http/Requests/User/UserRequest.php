@@ -34,8 +34,8 @@ class UserRequest extends FormRequest
         ];
 
         if ($this->isMethod('PUT') || $this->isMethod('PATCH')){
-            $rules['name'] = 'nullable|min:3|string|unique:users';
-            $rules['username'] = 'required|min:3|string|unique:users';
+            $rules['name'] = 'nullable|min:3|string';
+            $rules['username'] = 'required|min:3|string';
             $rules['email'] = 'required|email|string|min:3';
             $rules['role_id'] = 'required|exists:roles,id|integer';
             $rules['phone'] = 'required|min:3';
