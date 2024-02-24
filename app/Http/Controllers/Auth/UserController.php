@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Usescases\User\UserAction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -23,6 +24,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorize('show', Auth::user());
         $users = $this->userAction->fetchAllUsers();
         return view('pages.users.lists',compact(['users']));
     }
@@ -32,6 +34,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Auth::user());
         $roles = Role::all();
         return view('pages.users.create', compact(['roles']));
     }
@@ -41,6 +44,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        $this->authorize('create', Auth::user());
         $this->userAction->store($request->all());
         return redirect()->route('users.index')->with("New User is created successfully.");
     }
@@ -50,6 +54,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $this->authorize('show', Auth::user());
         return view('pages.users.show', compact(['user']));
     }
 
@@ -58,6 +63,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('update', Auth::user());
         $roles = Role::all();
         return view('pages.users.edit', compact(['user','roles']));
     }
@@ -67,6 +73,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
+        $this->authorize('update', Auth::user());
         $this->userAction->update($request->all(), $user);
         return redirect()->route('users.index')->with("New User is updated successfully.");
     }
@@ -76,6 +83,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->authorize('delete', Auth::user());
         $this->userAction->delete($user);
         return redirect()->route('users.index')->with("New User is deleted successfully.");
     }

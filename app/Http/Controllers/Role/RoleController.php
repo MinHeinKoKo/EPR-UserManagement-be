@@ -8,6 +8,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Usescases\Role\RoleAction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
@@ -23,6 +24,8 @@ class RoleController extends Controller
      */
     public function index()
     {
+        $this->authorize('show', Auth::user());
+
         $roles = $this->roleAction->fetchAll();
         return view('pages.roles.index', compact(['roles']));
     }
@@ -32,6 +35,8 @@ class RoleController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Auth::user());
+
         $permissions = Permission::all();
         return view('pages.roles.create',compact(['permissions']));
     }
@@ -41,6 +46,8 @@ class RoleController extends Controller
      */
     public function store(RoleRequest $request)
     {
+        $this->authorize('create', Auth::user());
+
         $this->roleAction->store($request->all());
         return redirect()->route('roles.index')->with("New Role is created.");
     }
@@ -50,6 +57,8 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
+        $this->authorize('show', Auth::user());
+
         return view('pages.roles.show', compact(['role']));
     }
 
@@ -58,6 +67,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        $this->authorize('update', Auth::user());
+
         $permissions = Permission::all();
         return view('pages.roles.edit', compact(['role','permissions']));
     }
@@ -67,6 +78,8 @@ class RoleController extends Controller
      */
     public function update(RoleRequest $request, Role $role)
     {
+        $this->authorize('update', Auth::user());
+
         $this->roleAction->update($request->all(), $role);
         return redirect()->route('roles.index')->with("New Role is updated.");
     }
@@ -76,6 +89,8 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        $this->authorize('delete', Auth::user());
+
         $this->roleAction->delete($role);
         return redirect()->route('roles.index')->with("Role is deleted successfully.");
     }

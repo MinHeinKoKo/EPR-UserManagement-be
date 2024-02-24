@@ -2,7 +2,9 @@
 @section('title', "ERPPOS | Permission")
 @section('content')
     <div class="flex gap-6 flex-col p-6">
-        <a href="{{ route('permissions.create') }}" class="bg-blue-400 text-black px-6 py-2 capitalize w-fit rounded-md">Create</a>
+        @can('create', Auth::user())
+            <a href="{{ route('permissions.create') }}" class="bg-blue-400 text-black px-6 py-2 capitalize w-fit rounded-md">Create</a>
+        @endcan
         <div class="overflow-x-auto w-full p-5 rounded-t-lg">
             <table class="divide-y-2 w-full divide-gray-200 bg-white text-sm">
                 <thead class="ltr:text-left rtl:text-right">
@@ -23,15 +25,19 @@
                         <td class="whitespace-nowrap text-center px-4 py-2 font-medium text-gray-900">{{ $item->name }}</td>
                         <td class="whitespace-nowrap text-center px-4 py-2 text-gray-700">{{ $item->feature->name }}</td>
                         <td class="whitespace-nowrap text-center px-4 py-2 text-gray-700 flex gap-2 justify-center">
+                            @can('update', Auth::user())
                             <a href="{{ route('permissions.edit' , $item->id) }}" class="text-green-400">
                                 Edit
                             </a>
+                            @endcan
                             /
+                                @can('delete', Auth::user())
                             <form method="post" action="{{ route('permissions.destroy', $item->id) }}" class="relative">
                                 @csrf
                                 @method('delete')
                                 <button class="text-red-500">Delete</button>
                             </form>
+                                @endcan
                         </td>
                         <td class="whitespace-nowrap text-center px-4 py-2 text-gray-700">{{ \Illuminate\Support\Carbon::parse($item->created_at)->format('Y m d H:i:s') }}</td>
                     </tr>

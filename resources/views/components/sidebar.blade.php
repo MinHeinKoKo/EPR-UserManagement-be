@@ -82,6 +82,7 @@
                     </summary>
 
                     <ul class="mt-2 space-y-1 px-4">
+                        @can('create', Auth::user())
                         <li>
                             <a
                                 href="{{ route('roles.create') }}"
@@ -90,7 +91,8 @@
                                 Create
                             </a>
                         </li>
-
+                        @endcan
+                        @can('show', Auth::user())
                         <li>
                             <a
                                 href="{{ route('roles.index') }}"
@@ -99,6 +101,7 @@
                                 Lists
                             </a>
                         </li>
+                            @endcan
                     </ul>
                 </details>
             </li>
@@ -127,6 +130,7 @@
                     </summary>
 
                     <ul class="mt-2 space-y-1 px-4">
+                        @can('create', Auth::user())
                         <li>
                             <a
                                 href="{{ route('features.create') }}"
@@ -135,7 +139,8 @@
                                 Create
                             </a>
                         </li>
-
+                        @endcan
+                            @can('show', Auth::user())
                         <li>
                             <a
                                 href="{{ route('features.index') }}"
@@ -144,6 +149,7 @@
                                 Lists
                             </a>
                         </li>
+                            @endcan
                     </ul>
                 </details>
             </li>
@@ -171,6 +177,7 @@
                     </summary>
 
                     <ul class="mt-2 space-y-1 px-4">
+                        @can('create', Auth::user())
                         <li>
                             <a
                                 href="{{ route('permissions.create') }}"
@@ -179,7 +186,8 @@
                                 Create
                             </a>
                         </li>
-
+                        @endcan
+                            @can('show', Auth::user())
                         <li>
                             <a
                                 href="{{ route('permissions.index') }}"
@@ -188,6 +196,7 @@
                                 Lists
                             </a>
                         </li>
+                            @endcan
                     </ul>
                 </details>
             </li>

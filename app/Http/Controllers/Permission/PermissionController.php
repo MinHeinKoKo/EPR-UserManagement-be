@@ -9,6 +9,7 @@ use App\Models\Feature;
 use App\Models\Permission;
 use App\Usescases\Permission\PermissionAction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PermissionController extends Controller
 {
@@ -24,6 +25,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        $this->authorize('show', Auth::user());
         $permissions = $this->permissionAction->fetchAll();
         return view('pages.permissions.index', compact(['permissions']));
     }
@@ -33,6 +35,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Auth::user());
         $features = Feature::all();
         return view('pages.permissions.create', compact(['features']));
     }
@@ -42,6 +45,7 @@ class PermissionController extends Controller
      */
     public function store(PermissionRequest $request)
     {
+        $this->authorize('create', Auth::user());
         $this->permissionAction->store($request->all());
         return redirect()->route("permissions.index")->with("New Permission is created");
     }
@@ -51,6 +55,7 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
+        $this->authorize('show', Auth::user());
         return view('pages.permissions.show', compact(['permission']));
     }
 
@@ -59,6 +64,7 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
+        $this->authorize('update', Auth::user());
         $features = Feature::all();
         return view('pages.permissions.edit', compact(['permission', 'features']));
     }
@@ -68,6 +74,7 @@ class PermissionController extends Controller
      */
     public function update(PermissionRequest $request, Permission $permission)
     {
+        $this->authorize('update', Auth::user());
         $this->permissionAction->update($request->all(), $permission);
         return redirect()->route("permissions.index")->with("Permission is updated successfully.");
     }
@@ -77,6 +84,7 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
+        $this->authorize('delete', Auth::user());
         $this->permissionAction->delete($permission);
         return redirect()->route("permissions.index")->with("Permission is deleted successfully.");
     }
