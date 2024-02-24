@@ -17,9 +17,14 @@ class UpperToLowerCase
     {
         $inputs = $request->all();
 
-        foreach ($inputs as $key=>$value){
+        $converted = [];
 
+        foreach ($inputs as $key=>$value){
+            $converted[$key] = strtolower($value);
         }
 
+        $request->replace($converted);
+
+        return $next($request);
     }
 }

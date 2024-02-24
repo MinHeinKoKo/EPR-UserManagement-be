@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Permission;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\UpperToLowerCase;
 use App\Http\Requests\Permission\PermissionRequest;
 use App\Models\Feature;
 use App\Models\Permission;
