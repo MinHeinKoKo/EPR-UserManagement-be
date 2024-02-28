@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
 
         foreach ($features as $f){
             $feature = Feature::create([
-                'name' => 'user'
+                'name' => $f
             ]);
 
             foreach ($permissions as $p){

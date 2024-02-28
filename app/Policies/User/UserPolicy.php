@@ -15,23 +15,23 @@ class UserPolicy
         //
     }
 
-    public function create(User $user)
+    public function create(User $user , $feature = null)
     {
-        return $user->hasPermission('create');
+        return $user->hasPermission('create' , $feature);
     }
 
-    public function show(User $user)
+    public function view(User $user , $feature = null)
     {
-        return $user->hasPermission('show');
+        return $user->hasPermission('view' , $feature);
     }
 
-    public function update(User $user)
+    public function update(User $user , $feature = null)
     {
-        return $user->hasPermission('update');
+        return $user->hasPermission('update' , $feature);
     }
 
-    public function delete(User $user)
+    public function delete(User $user , $feature = null)
     {
-        return $user->hasPermission('delete');
+        return $user->hasPermission('delete' , $feature);
     }
 }
