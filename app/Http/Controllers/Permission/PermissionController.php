@@ -25,7 +25,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $this->authorize('show', Auth::user());
+        $this->authorize('view', Auth::user());
         $permissions = $this->permissionAction->fetchAll();
         return view('pages.permissions.index', compact(['permissions']));
     }
@@ -55,7 +55,7 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
-        $this->authorize('show', Auth::user());
+        $this->authorize('view', Auth::user());
         return view('pages.permissions.show', compact(['permission']));
     }
 
