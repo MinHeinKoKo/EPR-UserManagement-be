@@ -31,7 +31,18 @@
                 </div>
             </div>
 
+            @error('access')
+            <p class="text-red-600">{{ $message }}</p>
+            @enderror
+
+            @error('access.*')
+            <p class="text-red-600">{{ $message }}</p>
+            @enderror
+
             @error('access.*.permissions')
+            <p class="text-red-600">{{ $message }}</p>
+            @enderror
+            @error('access.*.permissions.*')
             <p class="text-red-600">{{ $message }}</p>
             @enderror
 

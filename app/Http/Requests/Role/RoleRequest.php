@@ -33,8 +33,8 @@ class RoleRequest extends FormRequest
             $rules['name'] = 'nullable|min:3|max:15|string';
             $rules['access'] = 'required|array';
             $rules['access.*.feature_id'] = 'required|integer|exists:features,id';
-            $rules['access.*.permissions'] = 'nullable|array';
-            $rules['access.*.permissions.*'] = 'nullable|integer|exists:permissions,id';
+            $rules['access.*.permissions'] = 'required|array';
+            $rules['access.*.permissions.*'] = 'required|integer|exists:permissions,id';
         }
 
         return $rules;

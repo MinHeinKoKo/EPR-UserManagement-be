@@ -30,7 +30,9 @@ class RoleRepository implements RoleInterface
                 'name' => $data['name']
             ]);
 
-            $role->permissions()->attach($data['permissions']);
+            foreach ($data['access'] as $access) {
+                $role->permissions()->attach($access['permissions']);
+            }
             DB::commit();
             return $role;
         }catch (\Exception $e){
@@ -44,11 +46,17 @@ class RoleRepository implements RoleInterface
     {
         try{
             DB::beginTransaction();
-            $role->permissions()->sync($data['permissions']);
-            DB::commit();
-            return $role->update([
+
+            $role->update([
                 'name' => $data['name']
             ]);
+
+            $role->permissions()->detach();
+            foreach ($data['access'] as $key=>$access) {
+                $role->permissions()->attach($access["permissions"]);
+            }
+            DB::commit();
+            return $role;
         }catch (\Exception $e){
             Log::error("The error message is ". $e->getMessage());
             DB::rollBack();

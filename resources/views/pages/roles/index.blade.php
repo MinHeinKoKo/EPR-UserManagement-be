@@ -34,16 +34,16 @@
                         </td>
                         <td class="px-4 py-2">
                             <div class="flex gap-2">
-                                @can('update', [Auth::user() , \App\Models\Role::class, 'role'])
+                                @can('update', $item)
                                     <a href="{{ route('roles.edit' , $item->id) }}" class="text-green-400">Edit</a>
                                 @endcan
-                                @can('delete', Auth::user())
+                                @can('delete', $item)
                                     <form method="post" action="{{ route('roles.destroy', $item->id) }}">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="text-red-500">Delete</button>
                                     </form>
-                                @endcan
+                                    @endcan
                             </div>
                         </td>
                         <td class="px-4 py-2 text-sm">{{ $item->created_at->format('Y m d H:i:s') }}</td>
