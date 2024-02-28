@@ -23,14 +23,18 @@ class RoleRequest extends FormRequest
     {
         $rules = [
             'name' => "required|min:3|max:15|string|unique:roles",
-            'permissions' => 'required',
-            'permissions.*' => "required|integer|exists:permissions,id"
+            'access' => 'required|array',
+            'access.*.feature_id' => 'required|integer|exists:features,id',
+            'access.*.permissions' => 'required|array',
+            'access.*.permissions.*' => "required|integer|exists:permissions,id"
         ];
 
         if ($this->isMethod('PUT') || $this->isMethod("PATCH")){
             $rules['name'] = 'nullable|min:3|max:15|string';
-            $rules['permissions'] = 'nullable';
-            $rules['permissions.*'] = 'nullable|integer|exists:permissions,id';
+            $rules['access'] = 'required|array';
+            $rules['access.*.feature_id'] = 'required|integer|exists:features,id';
+            $rules['access.*.permissions'] = 'required|array';
+            $rules['access.*.permissions.*'] = 'required|integer|exists:permissions,id';
         }
 
         return $rules;

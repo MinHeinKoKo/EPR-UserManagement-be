@@ -33,7 +33,7 @@
                     </summary>
 
                     <ul class="mt-2 space-y-1 px-4">
-                        @can('create', Auth::user())
+                        @can('create' , \Illuminate\Support\Facades\Auth::user())
                             <li>
                                 <a href="{{ route('users.create') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                                     Create
@@ -41,7 +41,7 @@
                             </li>
                         @endcan
 
-                        @can('view', Auth::user())
+                            @can('view' , \Illuminate\Support\Facades\Auth::user())
                                 <li>
                                     <a
                                         href="{{ route('users.index') }}"
@@ -79,7 +79,7 @@
                     </summary>
 
                     <ul class="mt-2 space-y-1 px-4">
-                        @can('create', Auth::user())
+                        @can('create' , \App\Models\Role::class)
                         <li>
                             <a
                                 href="{{ route('roles.create') }}"
@@ -89,7 +89,7 @@
                             </a>
                         </li>
                         @endcan
-                        @can('show', Auth::user())
+                            @can('view' , \App\Models\Role::class)
                         <li>
                             <a
                                 href="{{ route('roles.index') }}"
@@ -98,7 +98,8 @@
                                 Lists
                             </a>
                         </li>
-                            @endcan
+                                @endcan
+
                     </ul>
                 </details>
             </li>
