@@ -15,12 +15,12 @@ class UserPolicy
         //
     }
 
-    public function create(User $user , $feature = null)
+    public function create($user , $featureName)
     {
-        return $user->hasPermission('create' , $feature);
+        return $user->hasPermission('create' , $featureName);
     }
 
-    public function view(User $user , $feature = null)
+    public function view($user , $feature)
     {
         return $user->hasPermission('view' , $feature);
     }

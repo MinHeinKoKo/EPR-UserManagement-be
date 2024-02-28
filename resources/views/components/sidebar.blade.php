@@ -33,18 +33,15 @@
                     </summary>
 
                     <ul class="mt-2 space-y-1 px-4">
-                        @can('create', Auth::user(), 'user')
+                        @can('create', [Auth::user() , 'user' ])
                             <li>
-                                <a
-                                    href="{{ route('users.create') }}"
-                                    class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                                >
+                                <a href="{{ route('users.create') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                                     Create
                                 </a>
                             </li>
                         @endcan
 
-                        @can('view', Auth::user() , 'user')
+                        @can('view', [Auth::user() , 'user'])
                                 <li>
                                     <a
                                         href="{{ route('users.index') }}"

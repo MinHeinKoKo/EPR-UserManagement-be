@@ -53,11 +53,11 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class , 'role_id');
     }
 
-    public function hasPermission($permissionName , $feature)
+    public function hasPermission($permissionName , $featureName)
     {
         return $this->role->permissions()
-            ->whereHas('feature', function ($f) use($feature){
-                $f->where('name' , $feature);
+            ->whereHas('feature', function ($f) use($featureName){
+                $f->where('name' , $featureName);
             })
             ->where('name' ,$permissionName)
             ->exists();
