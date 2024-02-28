@@ -33,7 +33,7 @@
                     </summary>
 
                     <ul class="mt-2 space-y-1 px-4">
-                        @can('create', Auth::user())
+                        @can('create', Auth::user(), 'user')
                             <li>
                                 <a
                                     href="{{ route('users.create') }}"
@@ -44,7 +44,7 @@
                             </li>
                         @endcan
 
-                        @can('show', Auth::user())
+                        @can('view', Auth::user() , 'user')
                                 <li>
                                     <a
                                         href="{{ route('users.index') }}"
