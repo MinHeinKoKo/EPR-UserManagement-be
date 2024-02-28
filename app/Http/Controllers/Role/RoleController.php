@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Role;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Role\RoleRequest;
+use App\Models\Feature;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Usescases\Role\RoleAction;
@@ -24,8 +25,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $this->authorize('show', Auth::user());
-
+        $this->authorize('view', Role::class);
         $roles = $this->roleAction->fetchAll();
         return view('pages.roles.index', compact(['roles']));
     }
@@ -35,10 +35,9 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Auth::user());
-
-        $permissions = Permission::all();
-        return view('pages.roles.create',compact(['permissions']));
+        $this->authorize('create', Role::class);
+        $features = Feature::all();
+        return view('pages.roles.create',compact(['features']));
     }
 
     /**
@@ -46,8 +45,7 @@ class RoleController extends Controller
      */
     public function store(RoleRequest $request)
     {
-        $this->authorize('create', Auth::user());
-
+        $this->authorize('create', Role::class);
         $this->roleAction->store($request->all());
         return redirect()->route('roles.index')->with("New Role is created.");
     }
@@ -57,8 +55,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        $this->authorize('show', Auth::user());
-
+        $this->authorize('view', $role);
         return view('pages.roles.show', compact(['role']));
     }
 
@@ -67,10 +64,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        $this->authorize('update', Auth::user());
-
-        $permissions = Permission::all();
-        return view('pages.roles.edit', compact(['role','permissions']));
+        $this->authorize('update', $role);
+        $features = Feature::all();
+        return view('pages.roles.edit', compact(['role','features']));
     }
 
     /**
@@ -78,8 +74,7 @@ class RoleController extends Controller
      */
     public function update(RoleRequest $request, Role $role)
     {
-        $this->authorize('update', Auth::user());
-
+        $this->authorize('update', $role);
         $this->roleAction->update($request->all(), $role);
         return redirect()->route('roles.index')->with("New Role is updated.");
     }
@@ -89,8 +84,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        $this->authorize('delete', Auth::user());
-
+        $this->authorize('delete', $role);
         $this->roleAction->delete($role);
         return redirect()->route('roles.index')->with("Role is deleted successfully.");
     }

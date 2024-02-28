@@ -33,18 +33,15 @@
                     </summary>
 
                     <ul class="mt-2 space-y-1 px-4">
-                        @can('create', Auth::user())
+                        @can('create' , \Illuminate\Support\Facades\Auth::user())
                             <li>
-                                <a
-                                    href="{{ route('users.create') }}"
-                                    class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                                >
+                                <a href="{{ route('users.create') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                                     Create
                                 </a>
                             </li>
                         @endcan
 
-                        @can('show', Auth::user())
+                            @can('view' , \Illuminate\Support\Facades\Auth::user())
                                 <li>
                                     <a
                                         href="{{ route('users.index') }}"
@@ -82,7 +79,7 @@
                     </summary>
 
                     <ul class="mt-2 space-y-1 px-4">
-                        @can('create', Auth::user())
+                        @can('create' , \App\Models\Role::class)
                         <li>
                             <a
                                 href="{{ route('roles.create') }}"
@@ -92,7 +89,7 @@
                             </a>
                         </li>
                         @endcan
-                        @can('show', Auth::user())
+                            @can('view' , \App\Models\Role::class)
                         <li>
                             <a
                                 href="{{ route('roles.index') }}"
@@ -101,102 +98,8 @@
                                 Lists
                             </a>
                         </li>
-                            @endcan
-                    </ul>
-                </details>
-            </li>
+                                @endcan
 
-            <li>
-                <details class="group [&_summary::-webkit-details-marker]:hidden">
-                    <summary
-                        class="{{ request()->url() === route('features.index') ? "bg-green-300 hover:bg-green-300/50" : "text-gray-500 hover:bg-gray-100 hover:text-gray-700" }} flex cursor-pointer items-center justify-between rounded-lg px-4 py-2"
-                    >
-                        <span class="text-sm font-medium"> Features </span>
-
-                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-              >
-                <path
-                    fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                />
-              </svg>
-            </span>
-                    </summary>
-
-                    <ul class="mt-2 space-y-1 px-4">
-                        @can('create', Auth::user())
-                        <li>
-                            <a
-                                href="{{ route('features.create') }}"
-                                class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                            >
-                                Create
-                            </a>
-                        </li>
-                        @endcan
-                            @can('show', Auth::user())
-                        <li>
-                            <a
-                                href="{{ route('features.index') }}"
-                                class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                            >
-                                Lists
-                            </a>
-                        </li>
-                            @endcan
-                    </ul>
-                </details>
-            </li>
-            <li>
-                <details class="group [&_summary::-webkit-details-marker]:hidden">
-                    <summary
-                        class="{{ request()->url() === route('permissions.index') ? "bg-green-300 hover:bg-green-300/50" : "text-gray-500 hover:bg-gray-100 hover:text-gray-700" }} flex cursor-pointer items-center justify-between rounded-lg px-4 py-2"
-                    >
-                        <span class="text-sm font-medium"> Permissions </span>
-
-                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-              >
-                <path
-                    fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                />
-              </svg>
-            </span>
-                    </summary>
-
-                    <ul class="mt-2 space-y-1 px-4">
-                        @can('create', Auth::user())
-                        <li>
-                            <a
-                                href="{{ route('permissions.create') }}"
-                                class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                            >
-                                Create
-                            </a>
-                        </li>
-                        @endcan
-                            @can('show', Auth::user())
-                        <li>
-                            <a
-                                href="{{ route('permissions.index') }}"
-                                class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                            >
-                                Lists
-                            </a>
-                        </li>
-                            @endcan
                     </ul>
                 </details>
             </li>
