@@ -23,19 +23,28 @@ class DatabaseSeeder extends Seeder
         $features = ['user', 'role' , 'product'];
         $permissions = ['view', 'create', 'update', 'delete'];
 
+        $permissionLists = [];
+
         foreach ($features as $f){
             $feature = Feature::create([
                 'name' => 'user'
             ]);
 
             foreach ($permissions as $p){
-                Permission::create([
+                $permission = Permission::create([
                     'name' => $p,
                     'feature_id' => $feature->id
                 ]);
-            }
 
+                $permissionLists[] = $permission->id;
+            }
         }
+
+        $role = Role::create([
+            'name' => 'admin'
+        ]);
+
+        $role->permissions()->attach($permissionLists);
 
 
          \App\Models\User::factory()->create([
