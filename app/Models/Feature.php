@@ -9,4 +9,10 @@ class Feature extends Model
 {
     use HasFactory;
     protected $fillable = ['name'];
+
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class , 'feature_id');
+    }
+
 }
