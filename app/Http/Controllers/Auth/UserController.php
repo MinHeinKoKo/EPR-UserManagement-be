@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $this->authorize('show', Auth::user());
+        $this->authorize('view', Auth::user());
         $users = $this->userAction->fetchAllUsers();
         return view('pages.users.lists',compact(['users']));
     }
@@ -54,7 +54,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $this->authorize('show', Auth::user());
+        $this->authorize('view', Auth::user());
         return view('pages.users.show', compact(['user']));
     }
 

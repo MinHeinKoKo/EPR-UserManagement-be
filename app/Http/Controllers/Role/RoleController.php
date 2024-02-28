@@ -24,7 +24,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $this->authorize('show', Auth::user());
+        $this->authorize('view', Auth::user());
 
         $roles = $this->roleAction->fetchAll();
         return view('pages.roles.index', compact(['roles']));
@@ -57,7 +57,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        $this->authorize('show', Auth::user());
+        $this->authorize('view', Auth::user());
 
         return view('pages.roles.show', compact(['role']));
     }

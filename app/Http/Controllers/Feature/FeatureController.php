@@ -22,7 +22,7 @@ class FeatureController extends Controller
      */
     public function index()
     {
-        $this->authorize('show', Auth::user());
+        $this->authorize('view', Auth::user());
         $features = $this->featureAction->fetchAllFeatures();
         return view('pages.features.index',compact(['features']));
     }
@@ -51,7 +51,7 @@ class FeatureController extends Controller
      */
     public function show(Feature $feature)
     {
-        $this->authorize('show', Auth::user());
+        $this->authorize('view', Auth::user());
         return view('pages.features.show', $feature);
     }
 

@@ -12,26 +12,25 @@ class UserPolicy
      */
     public function __construct()
     {
-        //
     }
 
-    public function create(User $user , $feature = null)
+    public function create(User $user)
     {
-        return $user->hasPermission('create' , $feature);
+        return $user->hasPermission('create' , 'user');
     }
 
-    public function view(User $user , $feature = null)
+    public function view(User $user)
     {
-        return $user->hasPermission('view' , $feature);
+        return $user->hasPermission('view' , 'user');
     }
 
-    public function update(User $user , $feature = null)
+    public function update(User $user )
     {
-        return $user->hasPermission('update' , $feature);
+        return $user->hasPermission('update' , 'user');
     }
 
-    public function delete(User $user , $feature = null)
+    public function delete(User $user)
     {
-        return $user->hasPermission('delete' , $feature);
+        return $user->hasPermission('delete', 'user');
     }
 }
