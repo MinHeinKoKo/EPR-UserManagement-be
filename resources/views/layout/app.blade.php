@@ -9,8 +9,10 @@
     @vite('resources/css/app.css')
 </head>
     <body>
-    <div class="max-w-7xl mx-auto h-auto">
-        
-    </div>
-</body>
+            <x-navbar />
+            <x-ecommerce.intro />
+        <div class="max-w-7xl mx-auto h-auto">
+            @yield('content')
+        </div>
+    </body>
 </html>

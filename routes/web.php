@@ -17,8 +17,16 @@ use App\Http\Controllers\Role\RoleController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('pages.e-commerce.home');
+})->name('home');
+
+Route::get('/shops', function () {
+    return "Welcome from shops page";
+})->name('shops');
+
+Route::get('/about-us', function () {
+    return "Welcome from about-us page";
+})->name('about-us');
 
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 
