@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Role\RoleController;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,9 @@ use App\Http\Controllers\Role\RoleController;
 */
 
 Route::get('/', function () {
-    return view('pages.e-commerce.home');
+    $categories = json_decode(Storage::disk('public')->get('categories.json'));
+    $products = json_decode(Storage::disk('public')->get('products.json'));
+    return view('pages.e-commerce.home', compact(['categories','products']));
 })->name('home');
 
 Route::get('/shops', function () {

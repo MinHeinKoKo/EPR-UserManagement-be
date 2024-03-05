@@ -1,21 +1,19 @@
 <?php
 
-namespace App\View\Components\Ecommerce;
+namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Category extends Component
+class SearchInput extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(
-        public $category
-    )
+    public function __construct()
     {
-
+        //
     }
 
     /**
@@ -23,6 +21,6 @@ class Category extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.ecommerce.category');
+        return view('components.search-input');
     }
 }
