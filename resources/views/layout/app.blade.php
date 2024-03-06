@@ -17,6 +17,8 @@
     <x-ecommerce.carts />
     </body>
     <script>
+
+        //Cart functions
         let cartIsOpen = document.getElementById('cartComponents');
 
         // Cart Open Close Control
@@ -24,5 +26,37 @@
             cartIsOpen.classList.toggle('hidden')
         }
 
+        // Wait for the DOM content to be fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the category section element
+            const categorySection = document.getElementById('category');
+            const home = document.getElementById('home');
+            let isCategoryFixed = false; // Track the state of category section
+
+            // Function to handle intersection
+            const handleIntersection = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !isCategoryFixed) {
+                        console.log('Category section is intersecting with viewport');
+                        categorySection.classList.add('fixed', 'top-16', 'mt-10', 'z-20');
+                        isCategoryFixed = true; // Update state
+                    } else if (!entry.isIntersecting && isCategoryFixed) {
+                        console.log('Category section is not intersecting with viewport');
+                        categorySection.classList.remove('fixed', 'top-16', 'mt-10', 'z-20');
+                        isCategoryFixed = false; // Update state
+                    }
+                });
+            };
+
+            // Create IntersectionObserver
+            const observer = new IntersectionObserver(handleIntersection, {
+                root: null,
+                rootMargin: '-10% 0px -90% 0px',
+                threshold: 0 // Trigger when any part of the category section is visible
+            });
+
+            // Observe the category section
+            observer.observe(home);
+        });
     </script>
 </html>
