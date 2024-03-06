@@ -14,5 +14,15 @@
         <div class="max-w-7xl mx-auto h-auto">
             @yield('content')
         </div>
+    <x-ecommerce.carts />
     </body>
+    <script>
+        let cartIsOpen = document.getElementById('cartComponents');
+
+        // Cart Open Close Control
+        let setCart = () => {
+            cartIsOpen.classList.toggle('hidden')
+        }
+
+    </script>
 </html>
