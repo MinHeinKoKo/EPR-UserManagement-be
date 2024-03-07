@@ -17,9 +17,9 @@
         </div>
         <div class="w-full h-auto flex flex-col gap-y-3">
             <div class="w-full h-auto flex gap-x-2 my-5 flex-row flex-wrap">
-                @foreach($products as $product)
+                @foreach($products as $key=>$product)
                     <div class="w-[250px] mb-3">
-                        <x-ecommerce.product :product="$product" />
+                        <x-ecommerce.product :key="$key" :product="$product" />
                     </div>
                 @endforeach
             </div>

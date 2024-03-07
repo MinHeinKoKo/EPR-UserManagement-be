@@ -31,6 +31,12 @@ Route::get('/about-us', function () {
     return "Welcome from about-us page";
 })->name('about-us');
 
+Route::get('/detail/{id}', function(int $id){
+    $products = json_decode(Storage::disk('public')->get('products.json'));
+    $product = $products[$id];
+    return view('pages.e-commerce.detail', compact('product'));
+})->name('detail');
+
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 
 Route::post('/login', [LoginController::class , 'login'])->name('login.post');

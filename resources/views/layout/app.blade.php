@@ -9,8 +9,11 @@
     @vite('resources/css/app.css')
 </head>
     <body>
-            <x-navbar />
+        <x-navbar />
+            @if (Request::is('/'))
             <x-ecommerce.intro />
+            @endif
+            
         <div class="max-w-7xl mx-auto h-auto">
             @yield('content')
         </div>
