@@ -48,10 +48,10 @@
                         </button>
                     </div>
                     <div class="flex gap-x-2 w-full h-auto">
-                        <div class="">
+                        <a href="{{ route("profile") }}" class="">
                             <h3 class="text-lg font-semibold">Min Hein Ko Ko</h3>
                             <p class="text-sm">koko@minhein.com</p>
-                        </div>
+                        </a>
                     </div></div>
             </div>
         </div>
