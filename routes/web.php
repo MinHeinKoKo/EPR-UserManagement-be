@@ -31,6 +31,14 @@ Route::get('/about-us', function () {
     return "Welcome from about-us page";
 })->name('about-us');
 
+Route::get('/profile', function(){
+    return view('pages.e-commerce.profile.order');
+})->name("profile");
+
+Route::get('/profile-edit', function(){
+    return view('pages.e-commerce.profile.setting');
+})->name("profile.edit");
+
 Route::get('/detail/{id}', function(int $id){
     $products = json_decode(Storage::disk('public')->get('products.json'));
     $product = $products[$id];
