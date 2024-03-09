@@ -14,7 +14,7 @@
             <x-ecommerce.intro />
             @endif
             
-        <div class="max-w-7xl mx-auto h-auto">
+        <div class="h-auto mx-auto max-w-7xl">
             @yield('content')
         </div>
     <x-ecommerce.carts />
@@ -41,11 +41,11 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting && !isCategoryFixed) {
                         console.log('Category section is intersecting with viewport');
-                        categorySection.classList.add('fixed', 'top-16', 'mt-10', 'z-20');
+                        categorySection.classList.add('fixed', 'top-16', 'mt-10', 'z-20' , 'hidden' , 'md:flex');
                         isCategoryFixed = true; // Update state
                     } else if (!entry.isIntersecting && isCategoryFixed) {
                         console.log('Category section is not intersecting with viewport');
-                        categorySection.classList.remove('fixed', 'top-16', 'mt-10', 'z-20');
+                        categorySection.classList.remove('fixed', 'top-16', 'mt-10', 'z-20', 'hidden' , 'md:flex');
                         isCategoryFixed = false; // Update state
                     }
                 });
